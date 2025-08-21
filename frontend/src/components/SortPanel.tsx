@@ -95,6 +95,7 @@ const SortPanel: React.FC<SortPanelProps> = ({ open, onClose, sortCriteria, setS
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-xl p-8 relative border border-gray-200">
         <button className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl" onClick={onClose}>&times;</button>
         <h2 className="text-2xl font-bold mb-6">Sort By</h2>
+        <p className="text-xl font-medium mb-3">(Double click to select order)</p>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={sortCriteria.map((c) => c.field)} strategy={verticalListSortingStrategy}>
             {sortCriteria.map((criterion, idx) => {
