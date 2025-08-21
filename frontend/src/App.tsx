@@ -5,6 +5,15 @@ import ClientTable from './components/ClientTable';
 import SortPanel from './components/SortPanel';
 import Tabs from './components/Tabs';
 
+declare global {
+  interface ImportMeta {
+    env: {
+      VITE_API_URL: string;
+      [key: string]: string;
+    };
+  }
+}
+
 const SORT_STORAGE_KEY = 'client-sort-settings';
 
 const sortFields: Array<{ label: string; value: keyof Omit<Client, '_id'> }> = [
@@ -30,7 +39,7 @@ const App: React.FC = () => {
   useEffect(() => {
     let ignore = false;
     setLoading(true);
-    axios.get<Client[]>('/api/clients')
+    axios.get<Client[]>(`${import.meta.env.VITE_API_URL}/api/clients`)
       .then(res => {
         if (!ignore) {
           setClients(res.data);
