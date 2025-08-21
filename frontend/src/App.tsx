@@ -65,7 +65,6 @@ const App: React.FC = () => {
       for (const { field, direction } of sortCriteria) {
         let v1 = a[field];
         let v2 = b[field];
-        // Fix: handle boolean and string comparison for status and type
         if (field === 'createdAt' || field === 'updatedAt') {
           v1 = new Date(v1 as string).getTime();
           v2 = new Date(v2 as string).getTime();
@@ -92,7 +91,6 @@ const App: React.FC = () => {
         </div>
         <Tabs value={tab} onChange={setTab} />
         <div className="flex justify-between items-center mb-4 mt-2">
-          {/* Left: search + applied sorts */}
           <div className="flex items-center gap-4">
             <div className="relative">
               <input
@@ -106,7 +104,6 @@ const App: React.FC = () => {
                 <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-2-2"/></svg>
               </span>
             </div>
-            {/* Applied Sorts */}
             <div className="flex items-center gap-2">
               {sortCriteria.map((c, i) => {
                 let label = '';
@@ -128,7 +125,6 @@ const App: React.FC = () => {
               })}
             </div>
           </div>
-          {/* Right: sort button */}
           <button className="relative text-gray-600 hover:text-black" onClick={() => setSortPanelOpen(true)}>
             <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">{sortCriteria.length}</span>

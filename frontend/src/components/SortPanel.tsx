@@ -41,10 +41,8 @@ const SortPanel: React.FC<SortPanelProps> = ({ open, onClose, sortCriteria, setS
     }
   }
 
-  // Only allow each sort option once
   const availableOptions = sortOptions.filter(opt => !sortCriteria.some(c => c.field === opt.value));
 
-  // Add a new sort criterion (first available field not already used)
   const handleAdd = () => {
     if (availableOptions.length > 0) {
       setSortCriteria([
@@ -54,7 +52,6 @@ const SortPanel: React.FC<SortPanelProps> = ({ open, onClose, sortCriteria, setS
     }
   };
 
-  // Remove a sort criterion
   const handleRemove = (idx: number) => {
     if (sortCriteria.length === 1) return;
     const updated = [...sortCriteria];
@@ -62,23 +59,19 @@ const SortPanel: React.FC<SortPanelProps> = ({ open, onClose, sortCriteria, setS
     setSortCriteria(updated);
   };
 
-  // Change field for a sort criterion
   const handleFieldChange = (idx: number, field: string) => {
     const updated = [...sortCriteria];
     updated[idx].field = field as any;
     setSortCriteria(updated);
   };
 
-  // Toggle direction for a sort criterion
   const handleDirectionToggle = (idx: number, dir: 'asc' | 'desc') => {
     const updated = [...sortCriteria];
-    // If already selected, unselect (remove this sort criterion)
     if (updated[idx].direction === dir) {
       if (sortCriteria.length > 1) {
         updated.splice(idx, 1);
         setSortCriteria(updated);
       }
-      // If only one, reset to default
       else {
         setSortCriteria([{ field: 'name', direction: 'asc' }]);
       }
@@ -116,7 +109,6 @@ const SortPanel: React.FC<SortPanelProps> = ({ open, onClose, sortCriteria, setS
             })}
           </SortableContext>
         </DndContext>
-        {/* Show inactive sort options below */}
         <div className="mt-2">
           {sortOptions.filter(opt => !sortCriteria.some(c => c.field === opt.value)).map(opt => (
             <div key={opt.value} className="flex items-center gap-3 mb-2 px-2 py-2 rounded-lg bg-transparent text-gray-400">
